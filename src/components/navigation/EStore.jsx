@@ -1,9 +1,43 @@
 import React from "react";
 import styled from "styled-components";
 
+import StoreItem from "../StoreItem";
+
 function EStore() {
   console.log("HOOKS loaded");
-  return <Wrapper>HOOOOOOOOOOOOOOOOOOOKS</Wrapper>;
+  return (
+    <Wrapper>
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+      <StoreItem />
+    </Wrapper>
+  );
 }
 
 export default EStore;
@@ -11,10 +45,14 @@ export default EStore;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  padding-top: 15px;
   display: flex;
-  padding: 15px;
-  border: 2px solid #61dbfb;
-  border-top-right-radius: 100px;
-  border-bottom-left-radius: 100px;
+  flex-wrap: wrap;
+  justify-content: center;
   box-sizing: border-box;
+
+  .store-item {
+    margin: 10px;
+    padding: 15px;
+  }
 `;

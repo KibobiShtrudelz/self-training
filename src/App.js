@@ -82,4 +82,9 @@ const Main = styled.main`
   color: #fff;
   box-sizing: border-box;
   background-color: #303030;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background-color: red;
+  }
 `;
