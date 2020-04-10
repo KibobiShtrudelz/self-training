@@ -7,7 +7,7 @@ function EStore() {
   let items = [];
 
   for (let i = 0; i < 30; i++) {
-    items.push(<StoreItem key={i} />);
+    items.push(<StoreItem key={i} imgUrl="https://picsum.photos/200" />);
   }
 
   return <Wrapper>{items}</Wrapper>;

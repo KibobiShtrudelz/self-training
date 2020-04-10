@@ -85,9 +85,9 @@ const Kibobi = styled.div`
 const Main = styled.main`
   position: absolute;
   left: 0;
-  top: 140px;
+  top: 148px;
   width: 100%;
-  height: calc(100% - 138px);
+  height: calc(100% - 148px);
   overflow-y: auto;
   padding: 15px;
   color: #fff;
@@ -97,6 +97,7 @@ const Main = styled.main`
   /* width */
   &::-webkit-scrollbar {
     width: 10px;
+    margin-top: 10px;
   }
 
   /* Track */

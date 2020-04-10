@@ -1,24 +1,56 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
-function Navigation() {
+const navigationTabs = [
+  {
+    title: "HOME",
+    path: "/",
+    exact: true,
+    icon: "icon-home",
+  },
+  {
+    title: "ABOUT",
+    path: "/about",
+    icon: "icon-fire",
+  },
+  {
+    title: "E-STORE",
+    path: "/e-store",
+    icon: "icon-leaf",
+  },
+  {
+    title: "COTACTS",
+    path: "/contacts",
+    icon: "icon-pen",
+  },
+];
+
+const Navigation = () => {
+  const { pathname } = useLocation();
+  console.log("pathname", pathname);
+
   return (
     <Wrapper>
       <Nav>
-        <NavItem to="/about">
-          ABOUT <span className="icon-fire"></span>
-        </NavItem>
-        <NavItem to="/e-store">
-          E-STORE <span className="icon-leaf"></span>
-        </NavItem>
-        <NavItem to="/contacts">
-          CONTACTS <span className="icon-mail2"></span>
-        </NavItem>
+        <Nav>
+          {navigationTabs.map((tab) => (
+            <NavItem
+              exact={tab.exact}
+              key={tab.path}
+              to={tab.path}
+              activeClassName="active"
+              isActive={() => pathname === tab.path}
+            >
+              {tab.title}
+              <span className={tab.icon} />
+            </NavItem>
+          ))}
+        </Nav>
       </Nav>
     </Wrapper>
   );
-}
+};
 
 export default Navigation;
 
@@ -32,10 +64,11 @@ const Wrapper = styled.div`
 `;
 
 const Nav = styled.nav`
+  width: 100%;
   display: flex;
 `;
 
-const NavItem = styled(Link)`
+const NavItem = styled(NavLink)`
   width: 100%;
   color: #fff;
   cursor: pointer;
@@ -44,17 +77,31 @@ const NavItem = styled(Link)`
   line-height: 3rem;
   text-align: center;
   text-decoration: none;
+  box-sizing: border-box;
   background-color: #171717;
+  border: 5px solid #171717;
+  outline: none;
 
   &:hover {
-    color: #000;
     font-size: 1.3rem;
-    background-color: #61dbfb;
+    border-bottom: 5px solid #fff;
     transition: font-size 0.25s ease;
+    transition: border-bottom 0.25s ease;
 
     .icon-leaf {
       color: green;
     }
+  }
+
+  &.active {
+    font-size: 1.3rem;
+    border-bottom: 5px solid #fff;
+    transition: font-size 0.25s ease;
+    transition: border-bottom 0.25s ease;
+  }
+
+  .icon-home {
+    color: orange;
   }
 
   .icon-fire {
@@ -63,5 +110,9 @@ const NavItem = styled(Link)`
 
   .icon-leaf {
     color: lime;
+  }
+
+  .icon-pen {
+    color: lightBlue;
   }
 `;
