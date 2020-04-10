@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 function About() {
-  return <Wrapper>ABAUT ABAUT</Wrapper>;
+  return <Wrapper>ABAUT ABAUT PAGE</Wrapper>;
 }
 
 export default About;
