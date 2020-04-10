@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Header from "./components/header/Header";
 import Navigation from "./components/Navigation";
-import Dashboard from "./components/Dashboard";
+import Home from "./components/Home";
 import About from "./components/About";
 import EStore from "./components/store/EStore";
 import Contacts from "./components/Contacts";
@@ -28,7 +28,7 @@ function App() {
       <Main>
         <Switch>
           <Route exact path="/">
-            <Dashboard />
+            <Home />
           </Route>
 
           <Route path="/about">
