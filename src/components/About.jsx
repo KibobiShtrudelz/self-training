@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-function Hooks() {
-  return <Wrapper>CONTACTSSSSSSSSSSSSSSSSss</Wrapper>;
+function About() {
+  return <Wrapper>ABAUT ABAUT</Wrapper>;
 }
 
-export default Hooks;
+export default About;
 
 const Wrapper = styled.div`
   width: 100%;

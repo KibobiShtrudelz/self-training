@@ -1,17 +1,19 @@
 import React from "react";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "./components/header/Header";
-import Navigation from "./components/navigation/Navigation";
-import EStore from "./components/navigation/EStore";
-import Contacts from "./components/navigation/Contacts";
+import Navigation from "./components/Navigation";
+import Dashboard from "./components/Dashboard";
+import About from "./components/About";
+import EStore from "./components/store/EStore";
+import Contacts from "./components/Contacts";
 
 const logo = require("./images/logo192.png");
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Header>
         <AppLogo>
           <Link to="/">
@@ -22,18 +24,27 @@ function App() {
         <Kibobi>KibobiShtrudelz</Kibobi>
       </Header>
       <Navigation />
+
       <Main>
         <Switch>
-          <Route exact path="/e-store">
+          <Route exact path="/">
+            <Dashboard />
+          </Route>
+
+          <Route path="/about">
+            <About />
+          </Route>
+
+          <Route path="/e-store">
             <EStore />
           </Route>
 
-          <Route exact path="/contacts">
+          <Route path="/contacts">
             <Contacts />
           </Route>
         </Switch>
       </Main>
-    </BrowserRouter>
+    </Router>
   );
 }
 
@@ -73,8 +84,8 @@ const Kibobi = styled.div`
 
 const Main = styled.main`
   position: absolute;
-  top: 138px;
   left: 0;
+  top: 140px;
   width: 100%;
   height: calc(100% - 138px);
   overflow-y: auto;
@@ -83,8 +94,19 @@ const Main = styled.main`
   box-sizing: border-box;
   background-color: #303030;
 
+  /* width */
   &::-webkit-scrollbar {
     width: 10px;
-    background-color: red;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #171717;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
   }
 `;
