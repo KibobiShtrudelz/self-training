@@ -5,7 +5,15 @@ import { Carousel } from "react-responsive-carousel";
 const Home = () => {
   return (
     <Wrapper>
-      <Carousel>
+      <Carousel
+        autoPlay
+        stopOnHover
+        useKeyboardArrows
+        transitionTime={2500}
+        centerMode
+        showStatus={false}
+        showThumbs={false}
+      >
         <div>
           <img src="https://picsum.photos/1200/600" alt="alt" />
         </div>
@@ -34,6 +42,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+
+  .carousel-root {
+    box-shadow: 0px 0px 5px 0px #fff;
+  }
 `;
 
 export default Home;

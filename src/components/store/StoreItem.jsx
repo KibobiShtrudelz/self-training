@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-function StoreItem({ imgUrl }) {
+function StoreItem({ title, imgUrl }) {
   return (
     <Wrapper className="store-item">
       <img src={imgUrl} alt="picsum" />
+      {/* {title} */}
     </Wrapper>
   );
 }
@@ -12,10 +13,11 @@ function StoreItem({ imgUrl }) {
 export default StoreItem;
 
 const Wrapper = styled.div`
-  width: 250px;
-  height: 230px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  border: 1px solid #fff;
 `;

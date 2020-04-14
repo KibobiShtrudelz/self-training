@@ -100,6 +100,10 @@ const NavItem = styled(NavLink)`
     transition: border-bottom 0.25s ease;
   }
 
+  span {
+    margin-left: 5px;
+  }
+
   .icon-home {
     color: orange;
   }
