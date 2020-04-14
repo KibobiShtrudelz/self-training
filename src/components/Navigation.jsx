@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 90px;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   box-sizing: border-box;
 `;
@@ -66,6 +66,11 @@ const Wrapper = styled.div`
 const Nav = styled.nav`
   width: 100%;
   display: flex;
+  position: relative;
+
+  @media only screen and (max-width: 560px) {
+    flex-direction: column;
+  }
 `;
 
 const NavItem = styled(NavLink)`

@@ -110,4 +110,9 @@ const Main = styled.main`
     background: #888;
     border-radius: 5px;
   }
+
+  @media only screen and (max-width: 560px) {
+    top: 322px;
+    height: calc(100% - 322px);
+  }
 `;

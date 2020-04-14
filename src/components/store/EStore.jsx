@@ -13,7 +13,7 @@ function EStore() {
           key={i}
           className="store-item"
           title="TITLE"
-          imgUrl="https://picsum.photos/350/450"
+          imgUrl={"https://picsum.photos/350/450?random=" + i}
         />
 
         <StoreSectionLayout className="store-selection-layout" />
@@ -29,12 +29,16 @@ export default EStore;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 15px;
+  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 560px) {
+    ${"" /* margin-top: 166px; */}
+  }
 `;
 
 const StoreSectionsWrapper = styled.div`
