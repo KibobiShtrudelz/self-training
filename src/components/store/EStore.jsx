@@ -57,6 +57,14 @@ const StoreSectionsWrapper = styled.div`
     border-radius: 5px;
     position: relative;
     z-index: 2;
+
+    img {
+      border: 1px solid #202020;
+      border-right: 3px solid #202020;
+      border-bottom: 3px solid #202020;
+      border-radius: 5px;
+      box-shadow: 5px 5px 5px 0px #171717;
+    }
   }
 `;
 
@@ -67,7 +75,7 @@ const StoreSectionLayout = styled.div`
   width: 100%;
   height: 100%;
   filter: blur(1px);
-  box-shadow: 0 0 0.5rem 0 #171717;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  ${"" /* box-shadow: 0 0 0.5rem 0 #171717; */}
+  ${"" /* background-color: rgba(0, 0, 0, 0.1); */}
+  ${"" /* border: 1px solid rgba(255, 255, 255, 0.1); */}
 `;

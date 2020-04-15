@@ -7,27 +7,29 @@ const Home = () => {
     <Wrapper>
       <Carousel
         autoPlay
-        stopOnHover
-        useKeyboardArrows
-        transitionTime={2500}
         centerMode
+        stopOnHover
+        infiniteLoop
+        useKeyboardArrows
         showStatus={false}
         showThumbs={false}
+        transitionTime={2500}
+        centerSlidePercentage={80}
       >
         <div>
-          <img src="https://picsum.photos/1200/600" alt="alt" />
+          <img src="https://picsum.photos/1200/600?random=1" alt="alt" />
         </div>
         <div>
-          <img src="https://picsum.photos/1200/600" alt="alt" />
+          <img src="https://picsum.photos/1200/600?random=2" alt="alt" />
         </div>
         <div>
-          <img src="https://picsum.photos/1200/600" alt="alt" />
+          <img src="https://picsum.photos/1200/600?random=3" alt="alt" />
         </div>
         <div>
-          <img src="https://picsum.photos/1200/600" alt="alt" />
+          <img src="https://picsum.photos/1200/600?random=4" alt="alt" />
         </div>
         <div>
-          <img src="https://picsum.photos/1200/600" alt="alt" />
+          <img src="https://picsum.photos/1200/600?random=5" alt="alt" />
         </div>
       </Carousel>
     </Wrapper>
