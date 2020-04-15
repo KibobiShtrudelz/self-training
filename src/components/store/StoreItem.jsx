@@ -17,6 +17,8 @@ const Wrapper = styled.div`
   height: 100%;
   cursor: pointer;
   display: flex;
+  flex-grow: 1;
+  flex-flow: row wrap;
   align-items: center;
   flex-direction: column;
   justify-content: center;

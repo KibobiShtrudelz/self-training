@@ -8,12 +8,11 @@ function EStore() {
 
   for (let i = 0; i < 4; i++) {
     items.push(
-      <StoreSectionsWrapper className="store-selection-wrapper">
+      <StoreSectionsWrapper key={i} className="store-selection-wrapper">
         <StoreItem
-          key={i}
           className="store-item"
           title="TITLE"
-          imgUrl={"https://picsum.photos/350/450?random=" + i}
+          imgUrl={`https://picsum.photos/350/450?random=${i}`}
         />
 
         <StoreSectionLayout className="store-selection-layout" />
@@ -35,10 +34,6 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   box-sizing: border-box;
-
-  @media only screen and (max-width: 560px) {
-    ${"" /* margin-top: 166px; */}
-  }
 `;
 
 const StoreSectionsWrapper = styled.div`
@@ -64,6 +59,17 @@ const StoreSectionsWrapper = styled.div`
       border-bottom: 3px solid #202020;
       border-radius: 5px;
       box-shadow: 5px 5px 5px 0px #171717;
+      display: flex;
+
+      :hover {
+        transform: rotate(5deg);
+        transition: transform 1s ease;
+      }
+
+      :not(:hover) {
+        transform: rotate(0deg);
+        transition: transform 1s ease;
+      }
     }
   }
 `;
@@ -75,7 +81,4 @@ const StoreSectionLayout = styled.div`
   width: 100%;
   height: 100%;
   filter: blur(1px);
-  ${"" /* box-shadow: 0 0 0.5rem 0 #171717; */}
-  ${"" /* background-color: rgba(0, 0, 0, 0.1); */}
-  ${"" /* border: 1px solid rgba(255, 255, 255, 0.1); */}
 `;

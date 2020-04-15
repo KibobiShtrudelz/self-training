@@ -28,7 +28,6 @@ const navigationTabs = [
 
 const Navigation = () => {
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
 
   return (
     <Wrapper>
