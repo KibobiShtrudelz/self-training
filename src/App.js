@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,24 +8,37 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import EStore from "./components/pages/store/EStore";
 import Contacts from "./components/pages/Contacts";
+import Modal from "./components/modals/Modal";
 
-const logo = require("./images/logo192.png");
+// const logo = require("./images/logo192.png");
 
-function App() {
+const App = () => {
+  const [showModal, setShowModal] = useState(true);
+
+  const openLoginModal = (isClicked) => setShowModal(isClicked);
+
+  const closeLoginModal = () => setShowModal(false);
+
   return (
     <Router>
       <Header>
         <AppLogo>
           <Link to="/">
-            <img src={logo} alt="App Logo" width={80} height={80} />
+            {/* <img src={logo} alt="App Logo" width={80} height={80} /> */}
+            <span className="icon-spinner9" />
           </Link>
-          <p>KibobiShtrudelz Inc.</p>
         </AppLogo>
         <Kibobi>KibobiShtrudelz</Kibobi>
       </Header>
       <Navigation />
 
       <Main>
+        {showModal && (
+          <Modal openModal={openLoginModal} closeModal={closeLoginModal}>
+            <div>MODAL LOGIN FORM</div>
+          </Modal>
+        )}
+
         <Switch>
           <Route exact path="/">
             <Home />
@@ -46,7 +59,7 @@ function App() {
       </Main>
     </Router>
   );
-}
+};
 
 export default App;
 
@@ -55,11 +68,15 @@ const AppLogo = styled.div`
   align-items: center;
   justify-content: center;
 
-  img {
-    width: 65px;
-    height: 65px;
-    margin: 0 25px 0 0;
+  a {
+    text-decoration: none;
     animation: spin 10s infinite linear;
+
+    .icon-spinner9 {
+      color: #fff;
+      font-size: 3.5em;
+      margin: 15px;
+    }
   }
 
   @keyframes spin {
@@ -95,20 +112,25 @@ const Main = styled.main`
   background-color: #303030;
 
   /* width */
-  &::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 10px;
     margin-top: 10px;
   }
 
   /* Track */
-  &::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background: #171717;
   }
 
   /* Handle */
-  &::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 5px;
+  }
+
+  .modal-wrapper {
+    top: 148px;
+    height: calc(100% - 148px);
   }
 
   @media only screen and (max-width: 560px) {

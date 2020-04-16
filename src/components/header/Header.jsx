@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-import Login from "../pages/Login";
+import Login from "../pages/login/HeaderLogin";
 
-const Header = ({ children }) => <Wrapper>{children}</Wrapper>;
+const Header = ({ children }) => (
+  <Wrapper>
+    {children}
+    <Login />
+  </Wrapper>
+);
 
 export default Header;
 
@@ -20,4 +25,8 @@ const Wrapper = styled.header`
   justify-content: space-between;
   box-sizing: border-box;
   background-color: #303030;
+
+  .login-wrapper {
+    margin-right: 100px;
+  }
 `;

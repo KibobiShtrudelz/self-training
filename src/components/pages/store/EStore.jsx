@@ -8,7 +8,7 @@ function EStore() {
 
   for (let i = 0; i < 4; i++) {
     items.push(
-      <StoreSectionsWrapper key={i} className="store-selection-wrapper">
+      <StoreSectionWrapper key={i} className="store-selection-wrapper">
         <StoreItem
           className="store-item"
           title="TITLE"
@@ -16,7 +16,7 @@ function EStore() {
         />
 
         <StoreSectionLayout className="store-selection-layout" />
-      </StoreSectionsWrapper>
+      </StoreSectionWrapper>
     );
   }
 
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const StoreSectionsWrapper = styled.div`
+const StoreSectionWrapper = styled.div`
   width: 400px;
   height: 500px;
   border-radius: 5px;
@@ -43,7 +43,7 @@ const StoreSectionsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0);
 
   .store-item {
     width: 350px;
@@ -99,6 +99,16 @@ const StoreSectionsWrapper = styled.div`
         }
       }
     }
+  }
+
+  :hover {
+    border-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.5s linear;
+  }
+
+  :not(:hover) {
+    border-color: #0000000;
+    transition: all 0.5s linear;
   }
 `;
 
