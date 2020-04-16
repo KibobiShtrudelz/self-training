@@ -46,7 +46,12 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 
   .carousel-root {
-    box-shadow: 0px 0px 5px 0px #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px #171717;
+
+    .slider-wrapper {
+      border-radius: 5px;
+    }
   }
 `;
 

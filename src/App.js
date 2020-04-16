@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "./components/header/Header";
-import Navigation from "./components/Navigation";
-import Home from "./components/Home";
-import About from "./components/About";
-import EStore from "./components/store/EStore";
-import Contacts from "./components/Contacts";
+import Navigation from "./components/pages/Navigation";
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import EStore from "./components/pages/store/EStore";
+import Contacts from "./components/pages/Contacts";
 
 const logo = require("./images/logo192.png");
 

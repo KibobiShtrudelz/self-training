@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Login from "../pages/Login";
+
 const Header = ({ children }) => <Wrapper>{children}</Wrapper>;
 
 export default Header;

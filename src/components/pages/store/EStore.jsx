@@ -28,7 +28,6 @@ export default EStore;
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  margin-top: 15px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -44,7 +43,7 @@ const StoreSectionsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 
   .store-item {
     width: 350px;
@@ -52,6 +51,30 @@ const StoreSectionsWrapper = styled.div`
     border-radius: 5px;
     position: relative;
     z-index: 2;
+    background-color: #202020;
+    transform: rotate(0deg);
+
+    :hover {
+      transform: rotate(-5deg);
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: all 0.5s ease-out;
+
+      img {
+        transform: rotate(15deg);
+        transition: all 0.5s ease-out;
+      }
+    }
+
+    :not(:hover) {
+      transform: rotate(0deg);
+      background-color: #303030;
+      transition: all 0.5s ease-in;
+
+      img {
+        transform: rotate(0deg);
+        transition: all 0.5s ease-in;
+      }
+    }
 
     img {
       border: 1px solid #202020;
@@ -60,15 +83,20 @@ const StoreSectionsWrapper = styled.div`
       border-radius: 5px;
       box-shadow: 5px 5px 5px 0px #171717;
       display: flex;
+    }
+  }
 
+  :nth-child(3),
+  :nth-child(4) {
+    .store-item {
       :hover {
         transform: rotate(5deg);
-        transition: transform 1s ease;
-      }
+        transition: all 0.5s ease-out;
 
-      :not(:hover) {
-        transform: rotate(0deg);
-        transition: transform 1s ease;
+        img {
+          transform: rotate(-15deg);
+          transition: all 0.5s ease-out;
+        }
       }
     }
   }
