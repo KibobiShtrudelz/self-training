@@ -13,7 +13,7 @@ import Modal from "./components/modals/Modal";
 // const logo = require("./images/logo192.png");
 
 const App = () => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const openLoginModal = (isClicked) => setShowModal(isClicked);
 
@@ -24,7 +24,6 @@ const App = () => {
       <Header>
         <AppLogo>
           <Link to="/">
-            {/* <img src={logo} alt="App Logo" width={80} height={80} /> */}
             <span className="icon-spinner9" />
           </Link>
         </AppLogo>
@@ -105,6 +104,7 @@ const Main = styled.main`
   top: 148px;
   width: 100%;
   height: calc(100% - 148px);
+  display: flex;
   overflow-y: auto;
   padding: 15px;
   color: #fff;
@@ -133,8 +133,8 @@ const Main = styled.main`
     height: calc(100% - 148px);
   }
 
-  @media only screen and (max-width: 560px) {
+  ${"" /* @media only screen and (max-width: 560px) {
     top: 322px;
     height: calc(100% - 322px);
-  }
+  } */}
 `;

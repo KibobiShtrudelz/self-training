@@ -12,7 +12,8 @@ function EStore() {
         <StoreItem
           className="store-item"
           title="TITLE"
-          imgUrl={`https://picsum.photos/350/450?random=${i}`}
+          // imgUrl={`https://picsum.photos/300/450?random=${i}`}
+          imgUrl="https://source.unsplash.com/random"
         />
 
         <StoreSectionLayout className="store-selection-layout" />
@@ -36,7 +37,7 @@ const Wrapper = styled.div`
 `;
 
 const StoreSectionWrapper = styled.div`
-  width: 400px;
+  width: 20%;
   height: 500px;
   border-radius: 5px;
   position: relative;
@@ -46,11 +47,11 @@ const StoreSectionWrapper = styled.div`
   border: 2px solid rgba(255, 255, 255, 0);
 
   .store-item {
-    width: 350px;
+    width: 100%;
     height: 450px;
     border-radius: 5px;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     background-color: #202020;
     transform: rotate(0deg);
 
@@ -59,9 +60,13 @@ const StoreSectionWrapper = styled.div`
       background-color: rgba(255, 255, 255, 0.1);
       transition: all 0.5s ease-out;
 
-      img {
-        transform: rotate(15deg);
+      .shrink {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform: rotate(10deg);
         transition: all 0.5s ease-out;
+        box-shadow: -5px 5px 5px 0px #171717;
       }
     }
 
@@ -70,19 +75,28 @@ const StoreSectionWrapper = styled.div`
       background-color: #303030;
       transition: all 0.5s ease-in;
 
-      img {
+      .shrink {
         transform: rotate(0deg);
         transition: all 0.5s ease-in;
       }
     }
 
-    img {
+    .shrink {
+      width: 110%;
+      height: 110%;
       border: 1px solid #202020;
       border-right: 3px solid #202020;
       border-bottom: 3px solid #202020;
       border-radius: 5px;
-      box-shadow: 5px 5px 5px 0px #171717;
+      box-shadow: 5px 5px 5px 0px rgba(17, 17, 17, 0.5);
       display: flex;
+
+      :hover {
+        width: 100%;
+        height: 100%;
+        box-shadow: -5px 5px 5px 0px rgba(17, 17, 17, 1);
+        transition: all 0.5s ease-out;
+      }
     }
   }
 
@@ -93,9 +107,15 @@ const StoreSectionWrapper = styled.div`
         transform: rotate(5deg);
         transition: all 0.5s ease-out;
 
-        img {
-          transform: rotate(-15deg);
+        .shrink {
+          transform: rotate(-10deg);
           transition: all 0.5s ease-out;
+          box-shadow: 5px 5px 5px 0px rgba(17, 17, 17, 0.5);
+
+          :hover {
+            box-shadow: -5px 5px 5px 0px rgba(17, 17, 17, 1);
+            transition: all 0.5s ease-out;
+          }
         }
       }
     }
@@ -109,6 +129,10 @@ const StoreSectionWrapper = styled.div`
   :not(:hover) {
     border-color: #0000000;
     transition: all 0.5s linear;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
   }
 `;
 
