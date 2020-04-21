@@ -110,13 +110,17 @@ const StoreSectionWrapper = styled.div`
         .shrink {
           transform: rotate(-10deg);
           transition: all 0.5s ease-out;
-          box-shadow: 5px 5px 5px 0px rgba(17, 17, 17, 0.5);
+          box-shadow: -5px 5px 5px 0px rgba(17, 17, 17, 0.5);
 
           :hover {
-            box-shadow: -5px 5px 5px 0px rgba(17, 17, 17, 1);
+            box-shadow: 5px 5px 5px 0px rgba(17, 17, 17, 1);
             transition: all 0.5s ease-out;
           }
         }
+      }
+
+      .shrink {
+        box-shadow: -5px 5px 5px 0px rgba(17, 17, 17, 0.5);
       }
     }
   }
