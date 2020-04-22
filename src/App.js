@@ -9,11 +9,13 @@ import About from "./components/pages/About";
 import EStore from "./components/pages/store/EStore";
 import Contacts from "./components/pages/Contacts";
 import Modal from "./components/modals/Modal";
-
-// const logo = require("./images/logo192.png");
+import SectionsContainer from "./components/pages/store/sections/SectionsContainer";
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
+
+  // const location = useLocation();
+  // console.log("location", location);
 
   const openLoginModal = (isClicked) => setShowModal(isClicked);
 
@@ -47,8 +49,12 @@ const App = () => {
             <About />
           </Route>
 
-          <Route path="/e-store">
+          <Route exact path="/e-store">
             <EStore />
+          </Route>
+
+          <Route path="/e-store/:sectionId">
+            <SectionsContainer />
           </Route>
 
           <Route path="/contacts">
@@ -69,10 +75,10 @@ const AppLogo = styled.div`
 
   a {
     text-decoration: none;
-    animation: spin 10s infinite linear;
+    animation: spin 1.5s infinite linear;
 
     .icon-spinner9 {
-      color: #fff;
+      color: #1778f2;
       font-size: 3.5em;
       margin: 15px;
     }
@@ -132,9 +138,4 @@ const Main = styled.main`
     top: 148px;
     height: calc(100% - 148px);
   }
-
-  ${"" /* @media only screen and (max-width: 560px) {
-    top: 322px;
-    height: calc(100% - 322px);
-  } */}
 `;

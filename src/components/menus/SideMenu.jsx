@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function SideMenu() {
+const SideMenu = () => {
   let sideMenuTabs = [];
 
   return (
@@ -17,16 +17,16 @@ function SideMenu() {
       </ul>
     </Wrapper>
   );
-}
+};
 
 export default SideMenu;
 
 const Wrapper = styled.div`
-  top: 138px;
+  top: 165px;
   position: fixed;
   z-index: 1;
   width: 80px;
-  height: calc(100% - 138px);
+  height: calc(99% - 169px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;

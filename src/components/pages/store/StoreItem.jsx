@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-// TODO: add and style title prop
-const StoreItem = ({ title, imgUrl }) => {
+const StoreItem = ({ title, imgUrl, sectionNum }) => {
   return (
     <Wrapper className="store-item" imgUrl={imgUrl}>
-      <Divche className="shrink" />
-      {/* {title} */}
+      <SectionBorderShadow className="shrink" />
+      <h1>{title}</h1>
     </Wrapper>
   );
 };
@@ -23,9 +22,16 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   background-image: ${({ imgUrl }) => `url(${imgUrl})`};
+
+  h1 {
+    color: #000;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 `;
 
-const Divche = styled.div`
+const SectionBorderShadow = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;

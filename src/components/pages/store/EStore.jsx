@@ -1,28 +1,44 @@
 import React from "react";
+import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import StoreItem from "./StoreItem";
+import SectionsContainer from "./sections/SectionsContainer";
 
-function EStore() {
+const EStore = () => {
+  const { path, url } = useRouteMatch();
   let items = [];
 
   for (let i = 0; i < 4; i++) {
     items.push(
-      <StoreSectionWrapper key={i} className="store-selection-wrapper">
+      <StyledLink
+        key={i}
+        to={`${url}/section-${i + 1}`}
+        className="store-section-wrapper"
+      >
         <StoreItem
           className="store-item"
-          title="TITLE"
-          // imgUrl={`https://picsum.photos/300/450?random=${i}`}
+          title={`Section ${i + 1}`}
           imgUrl="https://source.unsplash.com/random"
         />
 
-        <StoreSectionLayout className="store-selection-layout" />
-      </StoreSectionWrapper>
+        <StoreSectionLayout className="store-section-layout" />
+      </StyledLink>
     );
   }
 
-  return <Wrapper>{items}</Wrapper>;
-}
+  return (
+    <Wrapper className="e-store-wrapper">
+      {items}
+
+      <Switch>
+        <Route path={`${path}/:sectionId`}>
+          <SectionsContainer />
+        </Route>
+      </Switch>
+    </Wrapper>
+  );
+};
 
 export default EStore;
 
@@ -36,7 +52,7 @@ const Wrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const StoreSectionWrapper = styled.div`
+const StyledLink = styled(Link)`
   width: 20%;
   height: 500px;
   border-radius: 5px;
@@ -83,7 +99,7 @@ const StoreSectionWrapper = styled.div`
 
     .shrink {
       width: 110%;
-      height: 110%;
+      height: 120%;
       border: 1px solid #202020;
       border-right: 3px solid #202020;
       border-bottom: 3px solid #202020;
