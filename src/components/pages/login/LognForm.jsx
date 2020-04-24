@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Input from "../../formElements/Input";
 import Button from "../../formElements/Button";
 
-const LoginForm = () => {
+const LoginForm = ({ closeModal }) => {
   const [loginCredentials, setLoginCredentials] = useState({
     email: "",
     password: "",
@@ -12,9 +12,15 @@ const LoginForm = () => {
 
   const { email, password } = loginCredentials;
 
+  const handleFormSubmit = () => {
+    // TODO: remove credentials from localStorage
+    localStorage.setItem("loginCredentials", JSON.stringify(loginCredentials));
+    closeModal();
+  };
+
   return (
     <Wrapper>
-      <StyledForm>
+      <StyledForm onSubmit={handleFormSubmit}>
         <StyledInput
           type="email"
           value={email}
@@ -36,7 +42,7 @@ const LoginForm = () => {
             })
           }
         />
-        <Button type="button" text="Login" icon="icon-user-check" />
+        <Button type="submit" text="Login" icon="icon-user-check" />
       </StyledForm>
     </Wrapper>
   );

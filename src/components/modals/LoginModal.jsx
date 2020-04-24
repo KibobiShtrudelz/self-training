@@ -10,7 +10,7 @@ const LoginModal = ({ closeLoginModal }) => {
   return (
     <Modal closeModal={closeLoginModal}>
       <Wrapper className="login-modal" bgImgUrl={bgImgUrl}>
-        <LoginForm />
+        <LoginForm closeModal={closeLoginModal} />
         <span>
           Don't have an account?
           <span className="login-modal__go-reg">
@@ -33,6 +33,7 @@ const Wrapper = styled.div`
   background-image: ${({ bgImgUrl }) => `url(${bgImgUrl})`};
 
   span:nth-of-type(1) {
+    cursor: pointer;
     margin-left: 3px;
   }
 
