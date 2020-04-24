@@ -32,7 +32,7 @@ const SectionsContainer = () => {
         break;
 
       default:
-        return <h1>This page doesn't exist.</h1>;
+        return null;
     }
   }, [sectionId]);
 

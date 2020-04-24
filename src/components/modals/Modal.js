@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Modal = ({ children, openModal, closeModal }) => {
   return (
     <ModalWrapper className="modal-wrapper">
-      <ModalContent className="modal-content"></ModalContent>
+      <ModalContent className="modal-content">{children}</ModalContent>
       <ModalLayout onClick={() => closeModal && closeModal()} />
     </ModalWrapper>
   );
@@ -22,16 +22,19 @@ const ModalWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 `;
 
 const ModalContent = styled.div`
   position: relative;
   z-index: 9999;
   display: flex;
-  min-width: 300px;
-  min-height: 300px;
+  min-width: 200px;
+  min-height: 200px;
   border-radius: 5px;
+  box-sizing: border-box;
   background-color: #303030;
+  box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.2);
 `;
 
 const ModalLayout = styled.div`

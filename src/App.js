@@ -8,14 +8,11 @@ import Home from "./components/pages/Home";
 import About from "./components/pages/About";
 import EStore from "./components/pages/store/EStore";
 import Contacts from "./components/pages/Contacts";
-import Modal from "./components/modals/Modal";
 import SectionsContainer from "./components/pages/store/sections/SectionsContainer";
+import LoginModal from "./components/modals/LoginModal";
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false);
-
-  // const location = useLocation();
-  // console.log("location", location);
+  const [showModal, setShowModal] = useState(true);
 
   const openLoginModal = (isClicked) => setShowModal(isClicked);
 
@@ -23,7 +20,7 @@ const App = () => {
 
   return (
     <Router>
-      <Header>
+      <Header openLoginModal={openLoginModal}>
         <AppLogo>
           <Link to="/">
             <span className="icon-spinner9" />
@@ -35,9 +32,9 @@ const App = () => {
 
       <Main>
         {showModal && (
-          <Modal openModal={openLoginModal} closeModal={closeLoginModal}>
+          <LoginModal closeLoginModal={closeLoginModal}>
             <div>MODAL LOGIN FORM</div>
-          </Modal>
+          </LoginModal>
         )}
 
         <Switch>
@@ -75,7 +72,7 @@ const AppLogo = styled.div`
 
   a {
     text-decoration: none;
-    animation: spin 1.5s infinite linear;
+    animation: spin 10s infinite linear;
 
     .icon-spinner9 {
       color: #1778f2;

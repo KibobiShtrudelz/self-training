@@ -13,6 +13,4 @@ const Wrapper = styled.div`
   margin-left: 80px;
   padding: 15px;
   box-sizing: border-box;
-
-  ${"" /* border: 2px solid blue; */}
 `;

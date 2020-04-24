@@ -1,11 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-const HeaderLogin = () => {
+const HeaderLogin = ({ openLoginModal }) => {
+  const { pathname } = useLocation();
+
   return (
     <Wrapper className="login-wrapper">
-      <NavLink to="/e-store">
+      <NavLink to={pathname} onClick={() => openLoginModal(true)}>
         Login <span className="icon-user-check" />
       </NavLink>
       <span>or</span>

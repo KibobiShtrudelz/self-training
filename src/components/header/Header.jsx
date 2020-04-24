@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import Login from "../pages/login/HeaderLogin";
 
-const Header = ({ children }) => (
+const Header = ({ children, openLoginModal }) => (
   <Wrapper>
     {children}
-    <Login />
+    <Login openLoginModal={openLoginModal} />
   </Wrapper>
 );
 
