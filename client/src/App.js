@@ -14,7 +14,7 @@ import LoginModal from "./components/modals/LoginModal";
 const App = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const openLoginModal = (isClicked) => setShowModal(isClicked);
+  const openLoginModal = isClicked => setShowModal(isClicked);
 
   const closeLoginModal = () => setShowModal(false);
 

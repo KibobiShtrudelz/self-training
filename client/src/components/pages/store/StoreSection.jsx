@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const StoreSection = ({ title, imgUrl }) => {
+const StoreSection = ({ id, title, imgUrl }) => {
   return (
     <Wrapper className="store-item" imgUrl={imgUrl}>
       <SectionBorderShadow className="shrink" />

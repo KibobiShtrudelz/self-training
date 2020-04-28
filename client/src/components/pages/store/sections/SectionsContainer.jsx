@@ -16,19 +16,19 @@ const SectionsContainer = () => {
   useEffect(() => {
     switch (sectionId) {
       case "section-1":
-        setSectionToRender(<SectionOne />);
+        setSectionToRender(<SectionOne id={1} />);
         break;
 
       case "section-2":
-        setSectionToRender(<SectionTwo />);
+        setSectionToRender(<SectionTwo id={2} />);
         break;
 
       case "section-3":
-        setSectionToRender(<SectionThree />);
+        setSectionToRender(<SectionThree id={3} />);
         break;
 
       case "section-4":
-        setSectionToRender(<SectionFour />);
+        setSectionToRender(<SectionFour id={4} />);
         break;
 
       default:

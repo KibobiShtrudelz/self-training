@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,38 +6,22 @@ import StoreSection from "./StoreSection";
 import SectionsContainer from "./sections/SectionsContainer";
 
 const EStore = () => {
-  const [eStoreSections, setEStoreSections] = useState([]);
-
-  const { sections } = eStoreSections;
+  // TODO: replace dummy sections with real
+  const sections = [1, 2, 3, 4];
 
   const { path, url } = useRouteMatch();
 
-  const getSections = async () => {
-    const response = await fetch("http://localhost:5000/e-store");
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw new Error(body.message);
-    }
-
-    return body;
-  };
-
-  useEffect(() => {
-      getSections().then(data => setEStoreSections(data));
-  }, []);
-
-  const items = sections?.map((section, idx) => (
+  const items = sections?.map(section => (
     <StyledLink
-      key={idx}
-      to={`${url}/section-${idx + 1}`}
+      key={section}
+      to={`${url}/section-${section}`}
       className="store-section-wrapper"
     >
       <StoreSection
         className="store-item"
-        title={`Section ${idx + 1}`}
+        title={`Section ${section}`}
         imgUrl="https://source.unsplash.com/random"
-        id={idx + 1}
+        id={section}
       />
 
       <StoreSectionLayout className="store-section-layout" />

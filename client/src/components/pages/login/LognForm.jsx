@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import Input from "../../formElements/Input";
@@ -10,35 +11,39 @@ const LoginForm = ({ closeModal }) => {
     password: "",
   });
 
-  const { email, password } = loginCredentials;
+  const history = useHistory();
 
-  const handleFormSubmit = () => {
-    // TODO: remove credentials from localStorage
-    localStorage.setItem("loginCredentials", JSON.stringify(loginCredentials));
-    closeModal();
-  };
+  const { email, password } = loginCredentials;
 
   return (
     <Wrapper>
-      <StyledForm onSubmit={handleFormSubmit}>
+      <StyledForm
+        onSubmit={e => {
+          e.preventDefault();
+          history.push("/login");
+          closeModal();
+        }}
+      >
         <StyledInput
           type="email"
+          name="email"
           value={email}
           placeholder="E-mail"
           autoComplete="off"
-          onChange={(e) =>
-            setLoginCredentials({ ...loginCredentials, email: e.target.value })
+          onChange={({ target }) =>
+            setLoginCredentials({ ...loginCredentials, email: target.value })
           }
         />
         <StyledInput
           type="password"
+          name="password"
           value={password}
           placeholder="Password"
           autoComplete="off"
-          onChange={(e) =>
+          onChange={({ target }) =>
             setLoginCredentials({
               ...loginCredentials,
-              password: e.target.value,
+              password: target.value,
             })
           }
         />

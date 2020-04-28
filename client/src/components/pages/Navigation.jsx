@@ -33,16 +33,16 @@ const Navigation = () => {
     <Wrapper>
       <Nav>
         <Nav>
-          {navigationTabs.map((tab) => (
+          {navigationTabs.map(({ path, icon, title, exact }) => (
             <NavItem
-              exact={tab.exact}
-              key={tab.path}
-              to={tab.path}
+              exact={exact}
+              key={path}
+              to={path}
               activeClassName="active"
-              isActive={() => pathname === tab.path}
+              isActive={() => pathname === path}
             >
-              {tab.title}
-              <span className={tab.icon} />
+              {title}
+              <span className={icon} />
             </NavItem>
           ))}
         </Nav>
