@@ -1,0 +1,302 @@
+[
+  {
+    "title": ["nesciunt", "enim", "tempora"],
+    "price": 185,
+    "id": 0,
+    "stock": 714
+  },
+  {
+    "title": ["odio", "et", "saepe"],
+    "price": 258,
+    "id": 1,
+    "stock": 787
+  },
+  {
+    "title": ["voluptate", "quibusdam", "veniam"],
+    "price": 661,
+    "id": 2,
+    "stock": 430
+  },
+  {
+    "title": ["debitis", "commodi", "dolores"],
+    "price": 709,
+    "id": 3,
+    "stock": 664
+  },
+  {
+    "title": ["nulla", "sint", "ducimus"],
+    "price": 579,
+    "id": 4,
+    "stock": 922
+  },
+  {
+    "title": ["a", "doloribus", "autem"],
+    "price": 986,
+    "id": 5,
+    "stock": 310
+  },
+  {
+    "title": ["voluptates", "iusto", "ea"],
+    "price": 595,
+    "id": 6,
+    "stock": 685
+  },
+  {
+    "title": ["minima", "eius", "soluta"],
+    "price": 364,
+    "id": 7,
+    "stock": 25
+  },
+  {
+    "title": ["quisquam", "fugiat", "voluptate"],
+    "price": 67,
+    "id": 8,
+    "stock": 533
+  },
+  {
+    "title": ["voluptatibus", "neque", "aut"],
+    "price": 328,
+    "id": 9,
+    "stock": 339
+  },
+  {
+    "title": ["doloribus", "voluptatum", "odit"],
+    "price": 591,
+    "id": 10,
+    "stock": 758
+  },
+  {
+    "title": ["et", "consequatur", "quo"],
+    "price": 534,
+    "id": 11,
+    "stock": 936
+  },
+  {
+    "title": ["sed", "illo", "velit"],
+    "price": 686,
+    "id": 12,
+    "stock": 473
+  },
+  {
+    "title": ["beatae", "qui", "et"],
+    "price": 574,
+    "id": 13,
+    "stock": 242
+  },
+  {
+    "title": ["sint", "rerum", "adipisci"],
+    "price": 563,
+    "id": 14,
+    "stock": 319
+  },
+  {
+    "title": ["beatae", "eum", "nihil"],
+    "price": 951,
+    "id": 15,
+    "stock": 24
+  },
+  {
+    "title": ["et", "explicabo", "debitis"],
+    "price": 569,
+    "id": 16,
+    "stock": 925
+  },
+  {
+    "title": ["est", "rerum", "laboriosam"],
+    "price": 902,
+    "id": 17,
+    "stock": 719
+  },
+  {
+    "title": ["in", "officiis", "voluptate"],
+    "price": 468,
+    "id": 18,
+    "stock": 476
+  },
+  {
+    "title": ["ut", "aut", "sapiente"],
+    "price": 987,
+    "id": 19,
+    "stock": 742
+  },
+  {
+    "title": ["quo", "dolores", "aliquid"],
+    "price": 176,
+    "id": 20,
+    "stock": 359
+  },
+  {
+    "title": ["repellendus", "odit", "soluta"],
+    "price": 678,
+    "id": 21,
+    "stock": 633
+  },
+  {
+    "title": ["dolore", "accusamus", "ex"],
+    "price": 811,
+    "id": 22,
+    "stock": 899
+  },
+  {
+    "title": ["est", "nobis", "recusandae"],
+    "price": 276,
+    "id": 23,
+    "stock": 438
+  },
+  {
+    "title": ["quaerat", "vitae", "non"],
+    "price": 911,
+    "id": 24,
+    "stock": 480
+  },
+  {
+    "title": ["aliquam", "et", "ipsa"],
+    "price": 330,
+    "id": 25,
+    "stock": 371
+  },
+  {
+    "title": ["reiciendis", "praesentium", "et"],
+    "price": 431,
+    "id": 26,
+    "stock": 439
+  },
+  {
+    "title": ["at", "ea", "labore"],
+    "price": 67,
+    "id": 27,
+    "stock": 537
+  },
+  {
+    "title": ["non", "corporis", "expedita"],
+    "price": 54,
+    "id": 28,
+    "stock": 247
+  },
+  {
+    "title": ["possimus", "id", "ut"],
+    "price": 663,
+    "id": 29,
+    "stock": 686
+  },
+  {
+    "title": ["nulla", "et", "id"],
+    "price": 640,
+    "id": 30,
+    "stock": 980
+  },
+  {
+    "title": ["consequatur", "enim", "facere"],
+    "price": 564,
+    "id": 31,
+    "stock": 279
+  },
+  {
+    "title": ["at", "quos", "est"],
+    "price": 428,
+    "id": 32,
+    "stock": 207
+  },
+  {
+    "title": ["dolore", "iure", "explicabo"],
+    "price": 160,
+    "id": 33,
+    "stock": 541
+  },
+  {
+    "title": ["veniam", "error", "excepturi"],
+    "price": 29,
+    "id": 34,
+    "stock": 386
+  },
+  {
+    "title": ["ea", "sint", "quisquam"],
+    "price": 567,
+    "id": 35,
+    "stock": 918
+  },
+  {
+    "title": ["vel", "fugit", "eos"],
+    "price": 646,
+    "id": 36,
+    "stock": 107
+  },
+  {
+    "title": ["numquam", "vero", "rerum"],
+    "price": 950,
+    "id": 37,
+    "stock": 864
+  },
+  {
+    "title": ["odio", "dolorum", "minima"],
+    "price": 253,
+    "id": 38,
+    "stock": 213
+  },
+  {
+    "title": ["repudiandae", "ducimus", "voluptatum"],
+    "price": 154,
+    "id": 39,
+    "stock": 124
+  },
+  {
+    "title": ["non", "veritatis", "quae"],
+    "price": 584,
+    "id": 40,
+    "stock": 496
+  },
+  {
+    "title": ["delectus", "est", "autem"],
+    "price": 712,
+    "id": 41,
+    "stock": 199
+  },
+  {
+    "title": ["laboriosam", "quia", "sed"],
+    "price": 155,
+    "id": 42,
+    "stock": 544
+  },
+  {
+    "title": ["et", "asperiores", "culpa"],
+    "price": 198,
+    "id": 43,
+    "stock": 722
+  },
+  {
+    "title": ["provident", "earum", "voluptatem"],
+    "price": 841,
+    "id": 44,
+    "stock": 686
+  },
+  {
+    "title": ["culpa", "incidunt", "deleniti"],
+    "price": 105,
+    "id": 45,
+    "stock": 584
+  },
+  {
+    "title": ["voluptas", "fugiat", "et"],
+    "price": 789,
+    "id": 46,
+    "stock": 530
+  },
+  {
+    "title": ["ad", "quia", "autem"],
+    "price": 684,
+    "id": 47,
+    "stock": 393
+  },
+  {
+    "title": ["laboriosam", "itaque", "est"],
+    "price": 277,
+    "id": 48,
+    "stock": 416
+  },
+  {
+    "title": ["rem", "omnis", "sit"],
+    "price": 765,
+    "id": 49,
+    "stock": 885
+  }
+]
