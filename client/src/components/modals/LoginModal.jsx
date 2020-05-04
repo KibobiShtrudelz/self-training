@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import Modal from "./Modal";
-import LoginForm from "../pages/login/LognForm";
+import LoginForm from "../pages/login/LoginForm";
 
 const bgImgUrl = require("../../images/formBg.jpg");
 
