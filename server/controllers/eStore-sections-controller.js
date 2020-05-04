@@ -3,7 +3,7 @@ const HttpError = require("../models/http-error");
 const FAKE_SECTION_DATA = require("../fakeData/fakeEstoreItems.json");
 
 const getSectionDataById = (req, res, next) => {
-  const sectionId = req.params.sid;
+  const sectionId = req.params.sectionId;
 
   switch (sectionId) {
     case "section-1":

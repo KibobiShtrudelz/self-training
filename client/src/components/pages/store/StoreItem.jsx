@@ -9,6 +9,7 @@ const StoreItem = ({ title, price, stock, imgUrl }) => {
         <ItemImage src={imgUrl} alt="imij" />
         <p>Price: {price} stinchi</p>
         <p>Items in stock: {stock}</p>
+        <span className="icon-cart" />
       </Item>
     </Wrapper>
   );
@@ -38,6 +39,10 @@ const Item = styled.div`
   justify-content: space-between;
   word-wrap: break-word;
   box-sizing: border-box;
+
+  span {
+    cursor: pointer;
+  }
 `;
 
 const ItemImage = styled.img`
