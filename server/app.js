@@ -7,6 +7,8 @@ const HttpError = require("./models/http-error");
 
 const app = express();
 
+const port = process.env.PORT || 5000;
+
 app.use(bodyParser.json());
 
 // app.use((req, res, next) => {
@@ -30,7 +32,7 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  if (!res.headerSent) {
+  if (res.headerSent) {
     return next(err);
   }
 
@@ -39,5 +41,4 @@ app.use((err, req, res, next) => {
     .json({ message: err.message || "Unknown error occured!" });
 });
 
-const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
