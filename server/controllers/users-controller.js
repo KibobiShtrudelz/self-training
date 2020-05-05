@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require("uuid");
+// const { v4: uuidv4 } = require("uuid");
 
 const HttpError = require("../models/http-error");
 
@@ -7,24 +7,11 @@ const FAKE_USERS = [
     creator: "u1",
     name: "Aladin Goliam Molia",
     email: "changa@chunga.diuner",
-    cart: [],
-  },
-];
-
-const FAKE_CART = [
-  {
-    creator: "u1",
-    title: "Cart item 1",
-    price: 9.99,
-    description: "item 1 description",
-    amount: 1,
-  },
-  {
-    creator: "u1",
-    title: "Cart item 2",
-    price: 5.55,
-    description: "item 2 description",
-    amount: 1,
+    cart: [
+      {
+        cartItems: [],
+      },
+    ],
   },
 ];
 
@@ -36,25 +23,55 @@ const getUserById = (req, res, next) => {
     throw new HttpError(404, "Could not find a user for the provided user id.");
   }
 
-  res.json({ user });
+  res.status(200).json({ user });
 };
 
 const createCart = (req, res, next) => {
-  const { title, description, price, amount, creator } = req.body;
+  const { userId } = req.params;
+  const user = FAKE_USERS.find(u => u.creator === userId);
+
+  if (!user) {
+    throw new HttpError(404, "Could not find a user for the provided user id.");
+  }
+
+  const { title, description, price, amount } = req.body;
+
   const createdCart = {
-    id: uuidv4(),
     title,
     description,
     price,
     amount,
-    creator,
   };
 
-  FAKE_CART.push(createdCart);
-  FAKE_USERS[0].cart.push(FAKE_CART);
+  FAKE_USERS[0].cart[0].cartItems.push(createdCart);
 
-  res.status(201).json({ cart: createdCart });
+  res.status(201).json({ cart: FAKE_USERS[0].cart });
 };
 
-exports.getUserById = getUserById;
-exports.createCart = createCart;
+const updateCart = (req, res, next) => {
+  // TODO: change logic to update specific item/s in cart by itemId
+
+  const { title, description } = req.body;
+  const { userId } = req.params;
+
+  console.log("FAKE_USERS[0].cart[0]", FAKE_USERS[0].cart[0]);
+  const updatedCart = FAKE_USERS[0].cart[0].cartItems[0];
+
+  console.log("updatedCart", updatedCart);
+  updatedCart.title = title;
+  updatedCart.description = description;
+
+  res.status(200).json({ cart: { cartItems: [{ ...updatedCart }] } });
+};
+
+const getCartById = (req, res, next) => {};
+
+const deleteCartById = (req, res, next) => {};
+
+module.exports = {
+  getUserById,
+  createCart,
+  updateCart,
+  getCartById,
+  deleteCartById,
+};
