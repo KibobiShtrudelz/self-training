@@ -66,7 +66,11 @@ const updateCart = (req, res, next) => {
 
 const getCartById = (req, res, next) => {};
 
-const deleteCartById = (req, res, next) => {};
+const deleteCartById = (req, res, next) => {
+  FAKE_USERS[0].cart = [];
+
+  res.status(200).json({ message: "Deleted cart.", cart: FAKE_USERS[0].cart });
+};
 
 module.exports = {
   getUserById,
