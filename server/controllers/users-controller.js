@@ -1,12 +1,14 @@
-// const { v4: uuidv4 } = require("uuid");
+const { v4: uuidv4 } = require("uuid");
 
 const HttpError = require("../models/http-error");
 
 const FAKE_USERS = [
   {
+    id: 1,
     creator: "u1",
-    name: "Aladin Goliam Molia",
+    name: "Alaedin Goliam Molia",
     email: "changa@chunga.diuner",
+    password: "shizalmainizal",
     cart: [
       {
         cartItems: [],
@@ -14,6 +16,48 @@ const FAKE_USERS = [
     ],
   },
 ];
+
+const getUsers = (req, res, next) => {
+  res.json({ users: FAKE_USERS });
+};
+
+const signup = (req, res, next) => {
+  const { name, email, password } = req.body;
+
+  const hasUser = FAKE_USERS.find(user => user.email === email);
+
+  if (hasUser) {
+    throw new HttpError(422, "E-mail already exists!");
+  }
+
+  const createUser = {
+    id: uuidv4(),
+    name,
+    email,
+    password,
+    cart: [
+      {
+        cartItems: [],
+      },
+    ],
+  };
+
+  FAKE_USERS.push(createUser);
+
+  res.status(201).json({ user: createUser });
+};
+
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  const identifiedUser = FAKE_USERS.find(user => user.email === email);
+
+  if (!identifiedUser || identifiedUser.password !== password) {
+    throw new HttpError(401, "No such user or wrong credentials!");
+  }
+
+  res.status(200).json({ message: "Logged in!" });
+};
 
 const getUserById = (req, res, next) => {
   const { userId } = req.params;
@@ -73,6 +117,9 @@ const deleteCartById = (req, res, next) => {
 };
 
 module.exports = {
+  getUsers,
+  signup,
+  login,
   getUserById,
   createCart,
   updateCart,
