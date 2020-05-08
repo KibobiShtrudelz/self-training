@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require("uuid");
+const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
 
@@ -22,6 +23,12 @@ const getUsers = (req, res, next) => {
 };
 
 const signup = (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    throw new HttpError(422, "Invalid inputs passed.");
+  }
+
   const { name, email, password } = req.body;
 
   const hasUser = FAKE_USERS.find(user => user.email === email);
@@ -48,6 +55,8 @@ const signup = (req, res, next) => {
 };
 
 const login = (req, res, next) => {
+  const errors = validationResult(req);
+
   const { email, password } = req.body;
 
   const identifiedUser = FAKE_USERS.find(user => user.email === email);
@@ -111,6 +120,11 @@ const updateCart = (req, res, next) => {
 const getCartById = (req, res, next) => {};
 
 const deleteCartById = (req, res, next) => {
+  // TODO: change delete logic to find and delete by id
+  if (FAKE_USERS[0].cart.length === 0) {
+    throw new HttpError("404, Cart is not empty!");
+  }
+
   FAKE_USERS[0].cart = [];
 
   res.status(200).json({ message: "Deleted cart.", cart: FAKE_USERS[0].cart });
