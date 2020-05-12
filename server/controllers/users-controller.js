@@ -1,7 +1,9 @@
+const MongoClient = require("mongodb").MongoClient;
 const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
+const mongo = require("../constants");
 
 const FAKE_USERS = [
   {
@@ -18,11 +20,11 @@ const FAKE_USERS = [
   },
 ];
 
-const getUsers = (req, res, next) => {
+const getUsers = async (req, res, next) => {
   res.json({ users: FAKE_USERS });
 };
 
-const signup = (req, res, next) => {
+const signup = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -51,7 +53,19 @@ const signup = (req, res, next) => {
 
   FAKE_USERS.push(createUser);
 
-  res.status(201).json({ user: createUser });
+  const client = new MongoClient(mongo.url, { useUnifiedTopology: true });
+
+  try {
+    await client.connect();
+    const db = client.db();
+    const result = await db.collection("users").insertOne(createUser);
+  } catch (error) {
+    return res.json({ message: "Could not store data." });
+  }
+
+  client.close();
+
+  res.status(201).json(createUser);
 };
 
 const login = (req, res, next) => {
