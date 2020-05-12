@@ -1,71 +1,111 @@
 const MongoClient = require("mongodb").MongoClient;
+const mongoose = require("mongoose");
 const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
-const mongo = require("../constants");
+const { mongo, FAKE_USERS } = require("../constants");
 
-const FAKE_USERS = [
-  {
-    id: 1,
-    creator: "u1",
-    name: "Alaedin Goliam Molia",
-    email: "changa@chunga.diuner",
-    password: "shizalmainizal",
-    cart: [
-      {
-        cartItems: [],
-      },
-    ],
-  },
-];
+const User = require("../models/user-model");
+
+mongoose
+  .connect(mongo.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connected to database"))
+  .catch(() => console.log("Connection failed!"));
+
+// const getUsers = async (req, res, next) => {
+//   const client = new MongoClient(mongo.url, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   });
+
+//   let users;
+
+//   try {
+//     await client.connect();
+
+//     const db = client.db();
+
+//     users = await db.collection("users").find().toArray();
+//   } catch (error) {
+//     return res.json({ message: "Could not retrieve users." });
+//   }
+
+//   client.close();
+
+//   res.json(users);
+// };
 
 const getUsers = async (req, res, next) => {
-  res.json({ users: FAKE_USERS });
+  const users = await User.find().exec();
+  res.json(users);
 };
 
+// const signup = async (req, res, next) => {
+//   const errors = validationResult(req);
+
+//   if (!errors.isEmpty()) {
+//     throw new HttpError(422, "Invalid inputs passed.");
+//   }
+
+//   const { name, email, password } = req.body;
+
+//   const hasUser = FAKE_USERS.find(user => user.email === email);
+
+//   if (hasUser) {
+//     throw new HttpError(422, "E-mail already exists!");
+//   }
+
+//   const createUser = {
+//     id: uuidv4(),
+//     name,
+//     email,
+//     password,
+//     cart: [
+//       {
+//         cartItems: [],
+//       },
+//     ],
+//   };
+
+//   FAKE_USERS.push(createUser);
+
+// const client = new MongoClient(mongo.url, {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+// });
+
+//   try {
+//     await client.connect();
+//     const db = client.db();
+//     const result = await db.collection("users").insertOne(createUser);
+//   } catch (error) {
+//     return res.json({ message: "Could not store data." });
+//   }
+
+//   client.close();
+
+//   res.status(201).json(createUser);
+// };
+
 const signup = async (req, res, next) => {
-  const errors = validationResult(req);
+  const createdUser = new User({
+    creator: uuidv4(),
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password: req.body.password,
+    cart: {
+      cartItems: [],
+    },
+  });
 
-  if (!errors.isEmpty()) {
-    throw new HttpError(422, "Invalid inputs passed.");
-  }
+  const result = await createdUser.save();
 
-  const { name, email, password } = req.body;
-
-  const hasUser = FAKE_USERS.find(user => user.email === email);
-
-  if (hasUser) {
-    throw new HttpError(422, "E-mail already exists!");
-  }
-
-  const createUser = {
-    id: uuidv4(),
-    name,
-    email,
-    password,
-    cart: [
-      {
-        cartItems: [],
-      },
-    ],
-  };
-
-  FAKE_USERS.push(createUser);
-
-  const client = new MongoClient(mongo.url, { useUnifiedTopology: true });
-
-  try {
-    await client.connect();
-    const db = client.db();
-    const result = await db.collection("users").insertOne(createUser);
-  } catch (error) {
-    return res.json({ message: "Could not store data." });
-  }
-
-  client.close();
-
-  res.status(201).json(createUser);
+  res.json(result);
 };
 
 const login = (req, res, next) => {
