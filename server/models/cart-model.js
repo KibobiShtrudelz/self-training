@@ -27,6 +27,11 @@ const cartSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  creator: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
 });
 
 module.exports = mongoose.model("Cart", cartSchema);
