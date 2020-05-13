@@ -1,4 +1,4 @@
-const mongo = {
+const MONGO = {
   url:
     "mongodb+srv://xxxtracookie:Snuki1990!@dime-bebe-website-xeqzy.mongodb.net/dime-store?retryWrites=true&w=majority",
 };
@@ -19,6 +19,6 @@ const FAKE_USERS = [
 ];
 
 module.exports = {
-  mongo,
+  MONGO,
   FAKE_USERS,
 };

@@ -1,9 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const eStoreRoutes = require("./routes/eStore-routes");
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
+const { MONGO } = require("./constants");
 
 const app = express();
 
@@ -41,4 +43,12 @@ app.use((err, req, res, next) => {
     .json({ message: err.message || "Unknown error occured!" });
 });
 
-app.listen(port, () => console.log(`Server is listening on port ${port}`));
+mongoose
+  .connect(MONGO.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() =>
+    app.listen(port, () => console.log(`Server is listening on port ${port}`))
+  )
+  .catch(error => console.log(error));

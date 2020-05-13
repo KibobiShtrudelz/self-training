@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const usersController = require("../controllers/users-controller");
+const cartsController = require("../controllers/carts-controller");
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get("/", usersController.getUsers);
 
 router.get("/:userId", usersController.getUserById);
 
-router.get("/:userId/cart", usersController.getCartById);
+router.get("/:userId/cart", cartsController.getCartById);
 
 // POST \\
 router.post(
@@ -31,12 +32,12 @@ router.post(
   usersController.login
 );
 
-router.post("/:userId/cart", usersController.createCart);
+router.post("/:userId/cart", cartsController.createCart);
 
 // PATCH \\
-router.patch("/:userId/cart", usersController.updateCart);
+router.patch("/:userId/cart", cartsController.updateCart);
 
 // DELETE \\
-router.delete("/:userId/cart", usersController.deleteCartById);
+router.delete("/:userId/cart", cartsController.deleteCartById);
 
 module.exports = router;

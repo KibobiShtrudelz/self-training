@@ -4,20 +4,12 @@ const { v4: uuidv4 } = require("uuid");
 const { validationResult } = require("express-validator");
 
 const HttpError = require("../models/http-error");
-const { mongo, FAKE_USERS } = require("../constants");
+const { MONGO, FAKE_USERS } = require("../constants");
 
 const User = require("../models/user-model");
 
-mongoose
-  .connect(mongo.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Connected to database"))
-  .catch(() => console.log("Connection failed!"));
-
 // const getUsers = async (req, res, next) => {
-//   const client = new MongoClient(mongo.url, {
+//   const client = new MongoClient(MONGO.url, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
 //   });
@@ -73,7 +65,7 @@ const getUsers = async (req, res, next) => {
 
 //   FAKE_USERS.push(createUser);
 
-// const client = new MongoClient(mongo.url, {
+// const client = new MongoClient(MONGO.url, {
 //   useUnifiedTopology: true,
 //   useNewUrlParser: true,
 // });
@@ -133,64 +125,9 @@ const getUserById = (req, res, next) => {
   res.status(200).json({ user });
 };
 
-const createCart = (req, res, next) => {
-  const { userId } = req.params;
-  const user = FAKE_USERS.find(u => u.creator === userId);
-
-  if (!user) {
-    throw new HttpError(404, "Could not find a user for the provided user id.");
-  }
-
-  const { title, description, price, amount } = req.body;
-
-  const createdCart = {
-    title,
-    description,
-    price,
-    amount,
-  };
-
-  FAKE_USERS[0].cart[0].cartItems.push(createdCart);
-
-  res.status(201).json({ cart: FAKE_USERS[0].cart });
-};
-
-const updateCart = (req, res, next) => {
-  // TODO: change logic to update specific item/s in cart by itemId
-
-  const { title, description } = req.body;
-  const { userId } = req.params;
-
-  console.log("FAKE_USERS[0].cart[0]", FAKE_USERS[0].cart[0]);
-  const updatedCart = FAKE_USERS[0].cart[0].cartItems[0];
-
-  console.log("updatedCart", updatedCart);
-  updatedCart.title = title;
-  updatedCart.description = description;
-
-  res.status(200).json({ cart: { cartItems: [{ ...updatedCart }] } });
-};
-
-const getCartById = (req, res, next) => {};
-
-const deleteCartById = (req, res, next) => {
-  // TODO: change delete logic to find and delete by id
-  if (FAKE_USERS[0].cart.length === 0) {
-    throw new HttpError("404, Cart is not empty!");
-  }
-
-  FAKE_USERS[0].cart = [];
-
-  res.status(200).json({ message: "Deleted cart.", cart: FAKE_USERS[0].cart });
-};
-
 module.exports = {
   getUsers,
   signup,
   login,
   getUserById,
-  createCart,
-  updateCart,
-  getCartById,
-  deleteCartById,
 };
