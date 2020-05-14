@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
+const uniqueValidator = require("mongoose-unique-validator");
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   first_name: {
     type: String,
     required: true,
@@ -8,6 +9,10 @@ const userSchema = new mongoose.Schema({
   last_name: {
     type: String,
     required: true,
+  },
+  address: {
+    type: String,
+    required: false,
   },
   email: {
     type: String,
@@ -17,7 +22,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+    minlength: 6,
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+// this package cheks if user's mail already exists in base
+userSchema.plugin(uniqueValidator);
+
+module.exports = model("User", userSchema);

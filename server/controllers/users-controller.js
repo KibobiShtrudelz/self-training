@@ -11,33 +11,68 @@ const getUsers = async (req, res, next) => {
 };
 
 const signup = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return next(new HttpError(422, "Invalid inputs!"));
+  }
+
+  const { email } = req.body;
+  let existingUser;
+
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    const error = new HttpError(500, "Signing up failed!");
+    return next(error);
+  }
+
+  if (existingUser) {
+    const error = new HttpError(422, "User exists!");
+    return next(error);
+  }
+
   const createdUser = new User({
     first_name: req.body.first_name,
     last_name: req.body.last_name,
+    address: req.body.address,
     email: req.body.email,
     password: req.body.password,
-    cart: {
-      cartItems: [],
-    },
   });
 
-  const result = await createdUser.save();
+  try {
+    await createdUser.save();
 
-  res.json(result);
+    res.status(201).json({ user: createdUser.toObject({ getters: true }) });
+  } catch (err) {
+    const error = new HttpError(500, "Signing up failed!");
+    return next(error);
+  }
 };
 
-const login = (req, res, next) => {
+const login = async (req, res, next) => {
   const errors = validationResult(req);
 
-  const { email, password } = req.body;
-
-  const identifiedUser = FAKE_USERS.find(user => user.email === email);
-
-  if (!identifiedUser || identifiedUser.password !== password) {
-    throw new HttpError(401, "No such user or wrong credentials!");
+  if (!errors.isEmpty()) {
+    return next(new HttpError(422, "Invalid inputs!"));
   }
 
-  res.status(200).json({ message: "Logged in!" });
+  const { email, password } = req.body;
+  let existingUser;
+
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (err) {
+    const error = new HttpError(500, "Logging in failed!");
+    return next(error);
+  }
+
+  if (!existingUser || existingUser.password !== password) {
+    const error = new HttpError(401, "Wrong credentials!");
+    return next(error);
+  }
+
+  res.json({ message: "Logged in!" });
 };
 
 const getUserById = (req, res, next) => {

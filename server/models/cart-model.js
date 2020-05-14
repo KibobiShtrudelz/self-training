@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 
-const cartSchema = new mongoose.Schema({
+const cartSchema = new Schema({
   cartItems: Array({
     title: {
       type: String,
@@ -28,10 +28,10 @@ const cartSchema = new mongoose.Schema({
     required: true,
   },
   creator: {
-    type: mongoose.Types.ObjectId,
+    type: Types.ObjectId,
     required: true,
     ref: "User",
   },
 });
 
-module.exports = mongoose.model("Cart", cartSchema);
+module.exports = model("Cart", cartSchema);
