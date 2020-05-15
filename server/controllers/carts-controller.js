@@ -1,42 +1,67 @@
-const HttpError = require("../models/http-error");
+const mongoose = require("mongoose");
+const { validationResult } = require("express-validator");
 
 const Cart = require("../models/cart-model");
 const User = require("../models/user-model");
+const HttpError = require("../models/http-error");
 
 const createCart = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError(422, "Invalid inputs passed, please check your data.")
+    );
+  }
+
+  const { cartItems } = req.body;
+
+  const total = cartItems.reduce((acc, curr) => ({
+    price: acc.price + curr.price,
+  }));
+
+  const createdCart = new Cart({
+    cartItems,
+    cartItemsCount: cartItems && cartItems.length,
+    cartItemsTotalPrice: total && total.price.toString(),
+    creator: req.params.userId,
+  });
+
+  let user;
+
   try {
-    const user = await User.findById(req.params.userId);
+    user = await User.findById(req.params.userId);
+  } catch (err) {
+    const error = new HttpError(500, "Creating cart failed, please try again.");
 
-    if (!user) {
-      const error = new HttpError(
-        500,
-        "Creating cart failed. User ID doesn't exist!"
-      );
+    return next(error);
+  }
 
-      return next(error);
-    }
+  if (!user) {
+    const error = new HttpError(
+      404,
+      "Creating cart failed. User ID doesn't exist!"
+    );
 
-    const { cartItems } = req.body;
+    return next(error);
+  }
 
-    const total = cartItems.reduce((acc, curr) => ({
-      price: acc.price + curr.price,
-    }));
+  console.log("user", user);
 
-    const createdCart = new Cart({
-      cartItems,
-      cartItemsCount: cartItems && cartItems.length,
-      cartItemsTotalPrice: total && total.price.toString(),
-      creator: req.params.userId,
-    });
-
-    await createdCart.save();
-
-    res.status(201).json({ cart: createdCart });
-  } catch {
+  try {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await createdCart.save({ session });
+    user.cart.push(createdCart);
+    await user.save({ session });
+    await session.commitTransaction();
+  } catch (err) {
     const error = new HttpError(500, "Creating cart failed!");
 
     return next(error);
   }
+
+  res.status(201).json({ cart: createdCart });
 };
 
 const getCartById = async (req, res, next) => {

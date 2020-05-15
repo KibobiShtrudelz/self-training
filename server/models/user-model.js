@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, Types, model } = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new Schema({
@@ -24,6 +24,13 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
   },
+  cart: [
+    {
+      type: Types.ObjectId,
+      required: true,
+      ref: "Cart",
+    },
+  ],
 });
 
 // this package cheks if user's mail already exists in base

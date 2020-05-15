@@ -5,11 +5,6 @@ const { FAKE_USERS } = require("../constants");
 
 const User = require("../models/user-model");
 
-const getUsers = async (req, res, next) => {
-  const users = await User.find().exec();
-  res.json(users);
-};
-
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
 
@@ -38,6 +33,7 @@ const signup = async (req, res, next) => {
     address: req.body.address,
     email: req.body.email,
     password: req.body.password,
+    cart: [],
   });
 
   try {
@@ -75,20 +71,24 @@ const login = async (req, res, next) => {
   res.json({ message: "Logged in!" });
 };
 
-const getUserById = (req, res, next) => {
-  const { userId } = req.params;
-  const user = FAKE_USERS.find(u => u.creator === userId);
+const getUsers = async (req, res, next) => {
+  let users;
 
-  if (!user) {
-    throw new HttpError(404, "Could not find a user for the provided user id.");
+  try {
+    users = await User.find({}, "-password").exec();
+    console.log("users", users);
+  } catch (err) {
+    const error = new HttpError(500, "Fetching users failed!");
+    return next(error);
   }
 
-  res.status(200).json({ user });
+  res.status(200).json({
+    users: users.map(user => user.toObject({ getters: true })),
+  });
 };
 
 module.exports = {
   getUsers,
   signup,
   login,
-  getUserById,
 };

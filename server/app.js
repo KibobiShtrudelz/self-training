@@ -26,7 +26,7 @@ app.use((req, res, next) => {
 
 app.use("/e-store", eStoreRoutes);
 
-app.use("/user", usersRoutes);
+app.use("/users", usersRoutes);
 
 app.use(() => {
   const error = new HttpError(404, "Could not find this route.");

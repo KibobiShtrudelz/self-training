@@ -9,8 +9,6 @@ const router = Router();
 // GET \\
 router.get("/", usersController.getUsers);
 
-router.get("/:userId", usersController.getUserById);
-
 router.get("/:userId/cart", cartsController.getCartById);
 
 // POST \\
