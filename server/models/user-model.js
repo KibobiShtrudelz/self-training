@@ -24,13 +24,10 @@ const userSchema = new Schema({
     required: true,
     minlength: 6,
   },
-  cart: [
-    {
-      type: Types.ObjectId,
-      required: true,
-      ref: "Cart",
-    },
-  ],
+  cart: {
+    type: Array,
+    required: true,
+  },
 });
 
 // this package cheks if user's mail already exists in base

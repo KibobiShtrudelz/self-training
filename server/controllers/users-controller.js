@@ -1,9 +1,8 @@
+const mongoose = require("mongoose");
 const { validationResult } = require("express-validator");
 
-const HttpError = require("../models/http-error");
-const { FAKE_USERS } = require("../constants");
-
 const User = require("../models/user-model");
+const HttpError = require("../models/http-error");
 
 const signup = async (req, res, next) => {
   const errors = validationResult(req);
@@ -33,7 +32,6 @@ const signup = async (req, res, next) => {
     address: req.body.address,
     email: req.body.email,
     password: req.body.password,
-    cart: [],
   });
 
   try {

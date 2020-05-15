@@ -52,7 +52,7 @@ const createCart = async (req, res, next) => {
     const session = await mongoose.startSession();
     session.startTransaction();
     await createdCart.save({ session });
-    user.cart.push(createdCart);
+    user.cartId.push(createdCart);
     await user.save({ session });
     await session.commitTransaction();
   } catch (err) {
@@ -98,7 +98,37 @@ const getCartById = async (req, res, next) => {
 
 const updateCart = (req, res, next) => {};
 
-const deleteCartById = (req, res, next) => {};
+const deleteCartById = async (req, res, next) => {
+  const { userId } = req.params;
+  let cart;
+
+  try {
+    cart = await Cart.findById(userId).populate("creator");
+    console.log("cart", cart);
+  } catch (err) {
+    const error = new HttpError(500, "Could not delete cart.");
+    return next(error);
+  }
+
+  if (!cart) {
+    const error = new HttpError(404, "Could not find cart with this id.");
+    return next(error);
+  }
+
+  try {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await cart.remove({ session });
+    cart.creator.pull(cart);
+    await cart.creator.save({ session });
+    await session.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(500, "Could not delete cart.");
+    return next(error);
+  }
+
+  res.status(200).json({ message: "Cart is deleted." });
+};
 
 module.exports = {
   createCart,
