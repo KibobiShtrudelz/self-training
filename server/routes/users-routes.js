@@ -2,14 +2,13 @@ const { Router } = require("express");
 const { check } = require("express-validator");
 
 const usersController = require("../controllers/users-controller");
-const cartsController = require("../controllers/carts-controller");
 
 const router = Router();
 
 //---------- GET ----------\\
 router.get("/", usersController.getUsers);
 
-router.get("/:userId/cart", cartsController.getCartById);
+router.get("/:userId/cart", usersController.getCart);
 
 //---------- POST ----------\\
 router.post(
@@ -30,12 +29,10 @@ router.post(
   usersController.login
 );
 
-router.post("/:userId/cart", cartsController.createCart);
-
 //---------- PATCH ----------\\
-router.patch("/:userId/cart", cartsController.updateCart);
+router.patch("/:userId/cart", usersController.updateCart);
 
 //---------- DELETE ----------\\
-router.delete("/:userId/cart", cartsController.deleteCartById);
+router.delete("/:userId/cart", usersController.deleteCart);
 
 module.exports = router;

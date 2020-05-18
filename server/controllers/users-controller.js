@@ -85,8 +85,103 @@ const getUsers = async (req, res, next) => {
   });
 };
 
+const updateCart = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError(422, "Invalid inputs passed, please check your data.")
+    );
+  }
+
+  let user;
+
+  try {
+    user = await User.findById(req.params.userId);
+  } catch (err) {
+    const error = new HttpError(500, "Updating cart failed, please try again.");
+
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError(
+      404,
+      "Updating cart failed. User ID doesn't exist!"
+    );
+
+    return next(error);
+  }
+
+  console.log("user", user);
+
+  const { cartItems } = req.body;
+
+  const total = cartItems.reduce((acc, curr) => ({
+    price: acc.price + curr.price,
+  }));
+
+  const updatedCart = {
+    cartItems,
+    cartItemsCount: cartItems && cartItems.length,
+    cartItemsTotalPrice: total && total.price.toString(),
+  };
+
+  try {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await user.save({ session });
+    user.cart.push(updatedCart);
+    await user.save({ session });
+    await session.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(500, "Updating cart failed!");
+
+    return next(error);
+  }
+
+  res.status(201).json({ cart: updatedCart });
+};
+
+const getCart = (req, res, next) => {};
+
+const deleteCart = async (req, res, next) => {
+  const { userId } = req.params;
+  let cart;
+
+  try {
+    cart = await Cart.findById(userId).populate("creator");
+    console.log("cart", cart);
+  } catch (err) {
+    const error = new HttpError(500, "Could not delete cart.");
+    return next(error);
+  }
+
+  if (!cart) {
+    const error = new HttpError(404, "Could not find cart with this id.");
+    return next(error);
+  }
+
+  try {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    await cart.remove({ session });
+    cart.creator.pull(cart);
+    await cart.creator.save({ session });
+    await session.commitTransaction();
+  } catch (err) {
+    const error = new HttpError(500, "Could not delete cart.");
+    return next(error);
+  }
+
+  res.status(200).json({ message: "Cart is deleted." });
+};
+
 module.exports = {
   getUsers,
   signup,
   login,
+  updateCart,
+  getCart,
+  deleteCart,
 };
