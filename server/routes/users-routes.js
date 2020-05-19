@@ -5,12 +5,10 @@ const usersController = require("../controllers/users-controller");
 
 const router = Router();
 
-//---------- GET ----------\\
 router.get("/", usersController.getUsers);
 
 router.get("/:userId", usersController.getUserById);
 
-//---------- POST ----------\\
 router.post(
   "/signup",
   [
@@ -29,10 +27,8 @@ router.post(
   usersController.login
 );
 
-//---------- PATCH ----------\\
 router.patch("/:userId/cart", usersController.updateCart);
 
-//---------- DELETE ----------\\
 router.delete("/:userId/cart", usersController.deleteCart);
 
 module.exports = router;

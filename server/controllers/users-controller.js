@@ -86,7 +86,31 @@ const getUsers = async (req, res, next) => {
   });
 };
 
-// TODO: make this update function update cartItems, etc.
+const getUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  let user;
+
+  try {
+    user = await User.findById(userId);
+    console.log("user", user);
+  } catch (err) {
+    const error = new HttpError(500, "Retrieving user failed.");
+
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError(404, "User not found, incorrect ID provided!");
+
+    return next(error);
+  }
+
+  console.log("user by id", user);
+
+  res.status(200).json(user);
+};
+
 const updateCart = async (req, res, next) => {
   const errors = validationResult(req);
 
@@ -142,31 +166,6 @@ const updateCart = async (req, res, next) => {
   res.status(201).json({ cart: createdCart });
 };
 
-const getUserById = async (req, res, next) => {
-  const { userId } = req.params;
-
-  let user;
-
-  try {
-    user = await User.findById(userId);
-    console.log("user", user);
-  } catch (err) {
-    const error = new HttpError(500, "Retrieving user failed.");
-
-    return next(error);
-  }
-
-  if (!user) {
-    const error = new HttpError(404, "User not found, incorrect ID provided!");
-
-    return next(error);
-  }
-
-  console.log("user by id", user);
-
-  res.status(200).json(user);
-};
-
 const deleteCart = async (req, res, next) => {
   const { userId } = req.params;
 
@@ -198,10 +197,10 @@ const deleteCart = async (req, res, next) => {
 };
 
 module.exports = {
-  getUsers,
   signup,
   login,
-  updateCart,
+  getUsers,
   getUserById,
+  updateCart,
   deleteCart,
 };
