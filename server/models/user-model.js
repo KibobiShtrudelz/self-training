@@ -25,7 +25,7 @@ const userSchema = new Schema({
     minlength: 6,
   },
   cart: {
-    type: Array,
+    type: Object,
     required: true,
     cartItems: Array({
       title: {

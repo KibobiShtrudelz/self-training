@@ -8,7 +8,7 @@ const router = Router();
 //---------- GET ----------\\
 router.get("/", usersController.getUsers);
 
-router.get("/:userId/cart", usersController.getCart);
+router.get("/:userId", usersController.getUserById);
 
 //---------- POST ----------\\
 router.post(
@@ -28,6 +28,8 @@ router.post(
   [check("email").isEmail(), check("password").isLength({ min: 5 })],
   usersController.login
 );
+
+router.post("/:userId/cart", usersController.createCart);
 
 //---------- PATCH ----------\\
 router.patch("/:userId/cart", usersController.updateCart);

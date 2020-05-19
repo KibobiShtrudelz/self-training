@@ -32,6 +32,7 @@ const signup = async (req, res, next) => {
     address: req.body.address,
     email: req.body.email,
     password: req.body.password,
+    cart: {},
   });
 
   try {
@@ -85,7 +86,8 @@ const getUsers = async (req, res, next) => {
   });
 };
 
-const updateCart = async (req, res, next) => {
+// TODO: make this update function update cartItems, etc.
+const createCart = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -99,7 +101,7 @@ const updateCart = async (req, res, next) => {
   try {
     user = await User.findById(req.params.userId);
   } catch (err) {
-    const error = new HttpError(500, "Updating cart failed, please try again.");
+    const error = new HttpError(500, "Creating cart failed, please try again.");
 
     return next(error);
   }
@@ -107,13 +109,11 @@ const updateCart = async (req, res, next) => {
   if (!user) {
     const error = new HttpError(
       404,
-      "Updating cart failed. User ID doesn't exist!"
+      "Creating cart failed. User ID doesn't exist!"
     );
 
     return next(error);
   }
-
-  console.log("user", user);
 
   const { cartItems } = req.body;
 
@@ -121,67 +121,90 @@ const updateCart = async (req, res, next) => {
     price: acc.price + curr.price,
   }));
 
-  const updatedCart = {
+  const currCart = (user && user.cart) || {};
+  console.log("currCart", currCart);
+
+  const createdCart = {
     cartItems,
     cartItemsCount: cartItems && cartItems.length,
     cartItemsTotalPrice: total && total.price.toString(),
   };
 
   try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    await user.save({ session });
-    user.cart.push(updatedCart);
-    await user.save({ session });
-    await session.commitTransaction();
+    user.cart = createdCart;
+    await user.save();
   } catch (err) {
-    const error = new HttpError(500, "Updating cart failed!");
+    const error = new HttpError(500, "Creating cart failed!");
 
     return next(error);
   }
 
-  res.status(201).json({ cart: updatedCart });
+  res.status(201).json({ cart: createdCart });
 };
 
-const getCart = (req, res, next) => {};
+const updateCart = (req, res, next) => {};
+
+const getUserById = async (req, res, next) => {
+  const { userId } = req.params;
+
+  let user;
+
+  try {
+    user = await User.findById(userId);
+    console.log("user", user);
+  } catch (err) {
+    const error = new HttpError(500, "Retrieving user failed.");
+
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError(404, "User not found, incorrect ID provided!");
+
+    return next(error);
+  }
+
+  console.log("user by id", user);
+
+  res.status(200).json(user);
+};
 
 const deleteCart = async (req, res, next) => {
   const { userId } = req.params;
-  let cart;
+
+  let user;
 
   try {
-    cart = await Cart.findById(userId).populate("creator");
-    console.log("cart", cart);
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(500, "Retrieving user failed.");
+
+    return next(error);
+  }
+
+  if (!user) {
+    const error = new HttpError(404, "User not found!");
+
+    return next(error);
+  }
+
+  try {
+    user.cart = [];
+    await user.save();
   } catch (err) {
     const error = new HttpError(500, "Could not delete cart.");
     return next(error);
   }
 
-  if (!cart) {
-    const error = new HttpError(404, "Could not find cart with this id.");
-    return next(error);
-  }
-
-  try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
-    await cart.remove({ session });
-    cart.creator.pull(cart);
-    await cart.creator.save({ session });
-    await session.commitTransaction();
-  } catch (err) {
-    const error = new HttpError(500, "Could not delete cart.");
-    return next(error);
-  }
-
-  res.status(200).json({ message: "Cart is deleted." });
+  res.status(200).json({ user, message: "Cart is deleted." });
 };
 
 module.exports = {
   getUsers,
   signup,
   login,
+  createCart,
   updateCart,
-  getCart,
+  getUserById,
   deleteCart,
 };
