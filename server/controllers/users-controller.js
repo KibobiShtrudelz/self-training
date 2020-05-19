@@ -87,7 +87,7 @@ const getUsers = async (req, res, next) => {
 };
 
 // TODO: make this update function update cartItems, etc.
-const createCart = async (req, res, next) => {
+const updateCart = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -121,11 +121,11 @@ const createCart = async (req, res, next) => {
     price: acc.price + curr.price,
   }));
 
-  const currCart = (user && user.cart) || {};
-  console.log("currCart", currCart);
-
   const createdCart = {
-    cartItems,
+    cartItems: {
+      ...user.cart.cartItems,
+      ...cartItems,
+    },
     cartItemsCount: cartItems && cartItems.length,
     cartItemsTotalPrice: total && total.price.toString(),
   };
@@ -141,8 +141,6 @@ const createCart = async (req, res, next) => {
 
   res.status(201).json({ cart: createdCart });
 };
-
-const updateCart = (req, res, next) => {};
 
 const getUserById = async (req, res, next) => {
   const { userId } = req.params;
@@ -196,14 +194,13 @@ const deleteCart = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(200).json({ user, message: "Cart is deleted." });
+  res.status(200).json({ user });
 };
 
 module.exports = {
   getUsers,
   signup,
   login,
-  createCart,
   updateCart,
   getUserById,
   deleteCart,

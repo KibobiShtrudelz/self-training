@@ -29,8 +29,6 @@ router.post(
   usersController.login
 );
 
-router.post("/:userId/cart", usersController.createCart);
-
 //---------- PATCH ----------\\
 router.patch("/:userId/cart", usersController.updateCart);
 
