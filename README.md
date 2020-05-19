@@ -1,1 +1,1 @@
-## React/Node Project
+## MERN e-commerce Project
