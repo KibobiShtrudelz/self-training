@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-const HeaderLogin = ({ openLoginModal }) => {
+const HeaderLoginOrRegister = ({ openLoginModal, openRegistrationModal }) => {
   const { pathname } = useLocation();
 
   return (
@@ -11,14 +11,14 @@ const HeaderLogin = ({ openLoginModal }) => {
         Login <span className="icon-user-check" />
       </NavLink>
       <span>or</span>
-      <NavLink to="">
+      <NavLink to={pathname} onClick={() => openRegistrationModal(true)}>
         Register <span className="icon-user-plus" />
       </NavLink>
     </Wrapper>
   );
 };
 
-export default HeaderLogin;
+export default HeaderLoginOrRegister;
 
 const Wrapper = styled.div`
   display: flex;

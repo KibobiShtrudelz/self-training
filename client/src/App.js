@@ -10,17 +10,32 @@ import EStore from "./components/pages/store/EStore";
 import Contacts from "./components/pages/Contacts";
 import SectionsContainer from "./components/pages/store/sections/SectionsContainer";
 import LoginModal from "./components/modals/LoginModal";
+import RegistrationModal from "./components/modals/RegistrationModal";
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegModal, setShowRegModal] = useState(false);
 
-  const openLoginModal = isClicked => setShowModal(isClicked);
+  const openLoginModal = isClicked => {
+    setShowLoginModal(isClicked);
+    setShowRegModal(!isClicked);
+  };
 
-  const closeLoginModal = () => setShowModal(false);
+  const closeLoginModal = () => setShowLoginModal(false);
+
+  const openRegistrationModal = isClicked => {
+    setShowRegModal(isClicked);
+    setShowLoginModal(!isClicked);
+  };
+
+  const closeRegModal = () => setShowRegModal(false);
 
   return (
     <Router>
-      <Header openLoginModal={openLoginModal}>
+      <Header
+        openLoginModal={openLoginModal}
+        openRegistrationModal={openRegistrationModal}
+      >
         <AppLogo>
           <Link to="/">
             <span className="icon-spinner9" />
@@ -31,11 +46,9 @@ const App = () => {
       <Navigation />
 
       <Main>
-        {showModal && (
-          <LoginModal closeLoginModal={closeLoginModal}>
-            <div>MODAL LOGIN FORM</div>
-          </LoginModal>
-        )}
+        {showLoginModal && <LoginModal closeModal={closeLoginModal} />}
+
+        {showRegModal && <RegistrationModal closeModal={closeRegModal} />}
 
         <Switch>
           <Route exact path="/">

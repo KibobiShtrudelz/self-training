@@ -2,19 +2,19 @@ import React from "react";
 import styled from "styled-components";
 
 import Modal from "./Modal";
-import LoginForm from "../pages/loginOrRegister/LoginForm";
+import RegistrationForm from "../pages/loginOrRegister/RegistrationForm";
 
 const bgImgUrl = require("../../images/formBg.jpg");
 
-const LoginModal = ({ closeModal }) => {
+const RegistrationModal = ({ closeModal }) => {
   return (
     <Modal closeModal={closeModal}>
-      <Wrapper className="login-modal" bgImgUrl={bgImgUrl}>
-        <LoginForm closeModal={closeModal} />
+      <Wrapper className="registration-modal" bgImgUrl={bgImgUrl}>
+        <RegistrationForm closeModal={closeModal} />
         <span>
-          Don't have an account?
-          <span className="login-modal__go-reg">
-            <span className="icon-user-plus" /> Register
+          Already have an account?
+          <span className="registration-modal__go-reg">
+            <span className="icon-user-plus" /> Login
           </span>
         </span>
       </Wrapper>
@@ -22,7 +22,7 @@ const LoginModal = ({ closeModal }) => {
   );
 };
 
-export default LoginModal;
+export default RegistrationModal;
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     margin-left: 3px;
   }
 
-  .login-modal__go-reg {
+  .registration-modal__go-reg {
     font-weight: 600;
     text-decoration: underline;
   }

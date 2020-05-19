@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
-import Login from "../pages/login/HeaderLogin"
-import Logout from "../Logout"
+import HeaderLoginOrRegister from "../pages/loginOrRegister/HeaderLoginOrRegister";
+import Logout from "../Logout";
 
-const Header = ({ children, openLoginModal }) => {
+const Header = ({ children, openLoginModal, openRegistrationModal }) => {
   return (
     <Wrapper>
       {children}
@@ -14,13 +14,16 @@ const Header = ({ children, openLoginModal }) => {
           <Logout />
         </WelcomeUserMsg>
       ) : (
-        <Login openLoginModal={openLoginModal} />
+        <HeaderLoginOrRegister
+          openLoginModal={openLoginModal}
+          openRegistrationModal={openRegistrationModal}
+        />
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
 
 const Wrapper = styled.header`
   position: fixed;
@@ -39,7 +42,7 @@ const Wrapper = styled.header`
   .login-wrapper {
     margin-right: 100px;
   }
-`
+`;
 
 const WelcomeUserMsg = styled.div`
   display: flex;
@@ -54,4 +57,4 @@ const WelcomeUserMsg = styled.div`
     font-weight: normal;
     text-decoration: underline;
   }
-`
+`;
